@@ -9,10 +9,22 @@ const logger = require("koa-logger");
 const jwt = require("jsonwebtoken");
 const app = new Koa();
 const router = new koaRouter();
+// 删除商品
+router.delete("/deleteGoods", async (ctx) => {
+  const { _id } = await ctx.request.body;
+  let sql = `DELETE FROM flower WHERE _id=${_id}`;
+  const res = await query(sql);
+  if (res) {
+    ctx.body = {
+      code: 200,
+      msg: "成功",
+    };
+  }
+});
 // 修改商品信息
 router.post("/editGoods", async (ctx) => {
-  const { name, image_url, desc, status, price } = await ctx.request.body;
-  let sql = `INSERT INTO flower(name, image_url, desc, status, price) VALUES (${name}, ${image_url}, ${desc}, ${status}, ${price})`;
+  const { _id, name, image_url, desc, status, price } = await ctx.request.body;
+  let sql = `UPDATE flower name=${name}, image_url=${image_url}, desc=${desc}, status=${status}, price=${price} WHERE _id=${_id}`;
   const res = await query(sql);
   if (res) {
     ctx.body = {
