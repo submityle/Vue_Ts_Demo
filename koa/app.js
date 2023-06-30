@@ -10,7 +10,17 @@ const jwt = require("jsonwebtoken");
 const app = new Koa();
 const router = new koaRouter();
 // 添加商品
-router.post("/addGoods", async (ctx) => {});
+router.post("/addGoods", async (ctx) => {
+  const {} = await ctx.request.body;
+  let sql = ``;
+  const res = await query(sql);
+  if (res) {
+    ctx.body = {
+      code: 200,
+      msg: "cg",
+    };
+  }
+});
 // 获取全部商品
 router.get("/getGoodsAll", async (ctx) => {
   let sql = "select * FROM flower";
