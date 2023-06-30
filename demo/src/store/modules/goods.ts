@@ -1,30 +1,41 @@
-import { _goodsAll, _goodsSearch } from '@/api'
+import { _goodsAll, _goodsSearch, _tabSorter } from '@/api'
 const goods = {
-  namespace: true,
+  namespaced: true,
   state: {
-    data: []
+    data: [],
+    tabSort: []
   },
   mutations: {
     SET_STATE(state: any, payload: any) {
-      state[payload.key] = payload.valueas
+      // console.log(payload)
+      state[payload.key] = payload.value
     }
   },
   actions: {
     async GET_GOODS_ALL(context: any, payload: any) {
-      const goods = await _goodsAll()
-      if (goods.data.code === 200) {
+      const data = await _goodsAll()
+      if (data.data.code === 200) {
         context.commit('SET_STATE', {
           key: 'data',
-          value: goods.data.data
+          value: data.data.data
         })
       }
     },
     async GET_GOODS_SEARCH(context: any, payload: string) {
-      const goods = await _goodsSearch(payload)
-      if (goods.data.code === 200) {
+      const data = await _goodsSearch(payload)
+      if (data.data.code === 200) {
         context.commit('SET_STATE', {
           key: 'data',
-          value: goods.data.data
+          value: data.data.data
+        })
+      }
+    },
+    async GET_TAB_SORT(context: any, payload: any) {
+      const data = await _tabSorter()
+      if (data.data.code === 200) {
+        context.commit('SET_STATE', {
+          key: 'tabSort',
+          value: data.data.data
         })
       }
     }

@@ -58,6 +58,19 @@ router.get("/getGoodsAll", async (ctx) => {
     };
   }
 });
+// 获取商品分类
+router.get("/getTabSort", async (ctx) => {
+  let sql = "select * FROM tabSort";
+  const res = await query(sql);
+
+  if (res) {
+    // console.log(res);
+    ctx.body = {
+      code: 200,
+      data: res,
+    };
+  }
+});
 // 登录
 router.post("/login", async (ctx) => {
   const { username, password } = ctx.request.body;
