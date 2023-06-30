@@ -12,7 +12,7 @@ const router = new koaRouter();
 // 修改商品信息
 router.post("/editGoods", async (ctx) => {
   const { name, image_url, desc, status, price } = await ctx.request.body;
-  let sql = `INSERT INTO banner(name, image_url, desc, status, price) VALUES (${name}, ${image_url}, ${desc}, ${status}, ${price})`;
+  let sql = `INSERT INTO flower(name, image_url, desc, status, price) VALUES (${name}, ${image_url}, ${desc}, ${status}, ${price})`;
   const res = await query(sql);
   if (res) {
     ctx.body = {
@@ -24,7 +24,7 @@ router.post("/editGoods", async (ctx) => {
 // 添加商品
 router.post("/addGoods", async (ctx) => {
   const { name, image_url, desc, status, price } = await ctx.request.body;
-  let sql = `INSERT INTO banner(name, image_url, desc, status, price) VALUES (${name}, ${image_url}, ${desc}, ${status}, ${price})`;
+  let sql = `INSERT INTO flower(name, image_url, desc, status, price) VALUES (${name}, ${image_url}, ${desc}, ${status}, ${price})`;
   const res = await query(sql);
   if (res) {
     ctx.body = {
