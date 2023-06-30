@@ -1,13 +1,9 @@
-import { createStore } from 'vuex'
-import login from './modules/login'
-import goods from './modules/goods'
-import carts from './modules/carts'
-import address from './modules/address'
+import { createStore } from "vuex";
+
 export default createStore({
-  modules: {
-    login,
-    goods,
-    carts,
-    address
-  }
-})
+  state: {},
+  getters: {},
+  mutations: {},
+  actions: {},
+  modules: {},
+});

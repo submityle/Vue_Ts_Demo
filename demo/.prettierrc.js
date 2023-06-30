@@ -7,9 +7,9 @@ module.exports = {
   bracketSpacing: true,
   jsxSingleQuote: false,
   jsxBracketSameLine: false,
-  endOfLine: 'auto',
-  arrowParens: 'avoid',
-  trailingComma: 'none',
-  proseWrap: 'preserve',
-  htmlWhitespaceSensitivity: 'ignore'
-}
+  endOfLine: "auto",
+  arrowParens: "avoid",
+  trailingComma: "none",
+  proseWrap: "preserve",
+  htmlWhitespaceSensitivity: "ignore",
+};
