@@ -9,6 +9,18 @@ const logger = require("koa-logger");
 const jwt = require("jsonwebtoken");
 const app = new Koa();
 const router = new koaRouter();
+// 修改商品信息
+router.post("/editGoods", async (ctx) => {
+  const { name, image_url, desc, status, price } = await ctx.request.body;
+  let sql = `INSERT INTO banner(name, image_url, desc, status, price) VALUES (${name}, ${image_url}, ${desc}, ${status}, ${price})`;
+  const res = await query(sql);
+  if (res) {
+    ctx.body = {
+      code: 200,
+      msg: "成功",
+    };
+  }
+});
 // 添加商品
 router.post("/addGoods", async (ctx) => {
   const { name, image_url, desc, status, price } = await ctx.request.body;
@@ -17,7 +29,7 @@ router.post("/addGoods", async (ctx) => {
   if (res) {
     ctx.body = {
       code: 200,
-      msg: "cg",
+      msg: "成功",
     };
   }
 });
