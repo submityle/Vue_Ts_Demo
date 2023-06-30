@@ -11,8 +11,8 @@ const app = new Koa();
 const router = new koaRouter();
 // 添加商品
 router.post("/addGoods", async (ctx) => {
-  const {} = await ctx.request.body;
-  let sql = ``;
+  const { name, image_url, desc, status, price } = await ctx.request.body;
+  let sql = `INSERT INTO banner(name, image_url, desc, status, price) VALUES (${name}, ${image_url}, ${desc}, ${status}, ${price})`;
   const res = await query(sql);
   if (res) {
     ctx.body = {
