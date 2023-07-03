@@ -1,9 +1,10 @@
-import { _goodsAll, _goodsSearch, _tabSorter } from '@/api'
+import { _getTabData, _goodsAll, _goodsSearch, _tabSorter } from '@/api'
 const goods = {
   namespaced: true,
   state: {
     data: [],
-    tabSort: []
+    tabSort: [],
+    tabData: []
   },
   mutations: {
     SET_STATE(state: any, payload: any) {
@@ -35,6 +36,15 @@ const goods = {
       if (data.data.code === 200) {
         context.commit('SET_STATE', {
           key: 'tabSort',
+          value: data.data.data
+        })
+      }
+    },
+    async GET_TAB_DATA(context: any, payload: any) {
+      const data = await _getTabData()
+      if (data.data.code === 200) {
+        context.commit('SET_STATE', {
+          key: 'tabData',
           value: data.data.data
         })
       }

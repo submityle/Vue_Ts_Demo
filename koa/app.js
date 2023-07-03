@@ -60,7 +60,20 @@ router.get("/getGoodsAll", async (ctx) => {
 });
 // 获取商品分类
 router.get("/getTabSort", async (ctx) => {
-  let sql = "select * FROM tabSort";
+  let sql = "select * FROM tabData ORDER BY _tid";
+  const res = await query(sql);
+
+  if (res) {
+    // console.log(res);
+    ctx.body = {
+      code: 200,
+      data: res,
+    };
+  }
+});
+// 获取分类商品
+router.get("/getTabData", async (ctx) => {
+  let sql = "select * FROM tabData ";
   const res = await query(sql);
 
   if (res) {
