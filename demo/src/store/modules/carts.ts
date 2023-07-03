@@ -1,7 +1,8 @@
 const carts = {
-  namespace: true,
+  namespaced: true,
   state: {
-    data: localStorage.getItem('carts') || []
+    data: localStorage.getItem('carts') || [],
+    checkAll: true
   },
   getters: {
     // ALL_PRICE() {},
@@ -10,6 +11,9 @@ const carts = {
   mutations: {
     SET_STATE(state: any, payload: any) {
       state[payload.key] = payload.valueas
+    },
+    CHECKALL(state: any) {
+      state.checkAll = !state.checkAll
     }
   },
   actions: {

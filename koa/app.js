@@ -84,6 +84,27 @@ router.get("/getTabData", async (ctx) => {
     };
   }
 });
+// 获取购物车列表
+router.get("/getCartList", async (ctx) => {
+  const BearerToken = ctx.header.authorization;
+  const token = BearerToken.split(" ")[0];
+  const uid = jwt.verify(token, "secret");
+  let sql = `SELECT * FROM cart JOIN flower ON cart._pid=flower._id WHERE cart._uid=${uid} `;
+  const res = await query(sql);
+  if (res) {
+    // console.log(res);
+    ctx.body = {
+      code: 200,
+      data: res,
+    };
+  }
+});
+// 购物车添加
+router.post("/addCartList", async (ctx) => {});
+// 购物车数量更改
+router.post("/editCartNum", async (ctx) => {});
+// 删除购物车
+router.post("/deleteCart", async (ctx) => {});
 // 登录
 router.post("/login", async (ctx) => {
   const { username, password } = ctx.request.body;
