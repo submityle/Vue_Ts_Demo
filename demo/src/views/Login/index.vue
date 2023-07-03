@@ -40,6 +40,7 @@ export default defineComponent({
     })
     const onFinish = async (values: any) => {
       // console.log('Success:', values)
+      login(formState)
       console.log(store)
 
       store.dispatch('login/_login', values)
@@ -52,7 +53,9 @@ export default defineComponent({
     const toEnroll = () => {
       router.push({ path: '/enroll' })
     }
-
+    const login = (formState: any) => {
+      store.dispatch('login/_login', formState)
+    }
     return {
       formState,
       onFinish,
