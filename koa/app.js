@@ -100,7 +100,31 @@ router.get("/getCartList", async (ctx) => {
   }
 });
 // 购物车添加
-router.post("/addCartList", async (ctx) => {});
+router.post("/addCartList", async (ctx) => {
+  const { _pid, _uid } = ctx.request.body;
+  let select_sql = `SELECT * FROM cart  WHERE _pid=${_pid} `;
+  const select_res = await query(select_sql);
+  if (!select_res) {
+    let sql = `INSERT INTO cart (_pid,_uid,num) VALUES (${_pid},${_uid},1)`;
+    const res = await query(sql);
+    if (res) {
+      // console.log(res);
+      ctx.body = {
+        code: 200,
+        data: res,
+      };
+    }
+  } else {
+    let add_sql = ``;
+    const res = await query(sql);
+    if (res) {
+      ctx.body = {
+        code: 200,
+        data: res,
+      };
+    }
+  }
+});
 // 购物车数量更改
 router.post("/editCartNum", async (ctx) => {});
 // 删除购物车
