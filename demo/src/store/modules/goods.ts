@@ -33,6 +33,8 @@ const goods = {
     },
     async GET_TAB_SORT(context: any, payload: any) {
       const data = await _tabSorter()
+      // console.log(data)
+
       if (data.data.code === 200) {
         context.commit('SET_STATE', {
           key: 'tabSort',
@@ -42,6 +44,8 @@ const goods = {
     },
     async GET_TAB_DATA(context: any, payload: any) {
       const data = await _getTabData()
+      // console.log(data)
+
       if (data.data.code === 200) {
         context.commit('SET_STATE', {
           key: 'tabData',

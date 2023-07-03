@@ -16,6 +16,7 @@ export default {
     ShopBar,
     BackBar
   }
+  // setup() {}
 }
 </script>
 

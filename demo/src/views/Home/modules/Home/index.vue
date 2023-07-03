@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <Banner></Banner>
-    <Tab :data="store.state.goods.tabSort"></Tab>
+  <div class="home">
+    <header></header>
+    <main><Banner></Banner></main>
+    <footer><Tab :data="store.state.goods.tabSort"></Tab></footer>
   </div>
 </template>
 
@@ -43,4 +44,23 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.home {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.home header {
+  width: 100%;
+  height: 50px;
+}
+.home footer {
+  width: 100%;
+  height: 50px;
+}
+.home main {
+  flex: 1;
+  /* overflow: hidden; */
+}
+</style>
