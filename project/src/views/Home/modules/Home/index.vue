@@ -77,7 +77,8 @@ export default defineComponent({
       visible.value = true
     }
     const fromHandleOk = (e: MouseEvent) => {
-      console.log(modalFromData)
+      // console.log(modalFromData)
+      store.addGood(modalFromData)
       visible.value = false
     }
     const formHandleCancel = () => {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <BackBar></BackBar>
-    <ShopCard :data="store.state.carts.data"></ShopCard>
+    <ShopCard :data="store.state.carts.data" :editNum="editNum"></ShopCard>
     <ShopBar :checkAll="store.state.carts.checkAll" :checkAllChange="checkAll"></ShopBar>
   </div>
 </template>
@@ -24,14 +24,17 @@ export default {
       store.commit('carts/CHECKALL')
     }
     // const
-
+    const editNum = (id: number, type: number) => {
+      store.dispatch('carts/EDIT_CART_NUM', { _id: id, type: type })
+    }
     onMounted(async () => {
       await store.dispatch('carts/GET_CART_DATA')
       console.log(store.state.carts)
     })
     return {
       store,
-      checkAll
+      checkAll,
+      editNum
     }
   }
 }

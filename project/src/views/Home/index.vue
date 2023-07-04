@@ -14,12 +14,14 @@
         >
           <template v-for="(item, index) in homeRouter" :key="index">
             <template v-if="!item.children">
-              <a-menu-item :key="index">
-                <template #icon>
-                  <PieChartOutlined />
-                </template>
-                {{ item.name }}
-              </a-menu-item>
+              <router-link :to="item.path">
+                <a-menu-item :key="index">
+                  <template #icon>
+                    <PieChartOutlined />
+                  </template>
+                  {{ item.name }}
+                </a-menu-item>
+              </router-link>
             </template>
             <template v-else>
               <sub-menu :key="index" :menu-info="item" />

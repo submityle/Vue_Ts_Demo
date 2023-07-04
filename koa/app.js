@@ -35,13 +35,15 @@ router.post("/editGoods", async (ctx) => {
 });
 // 添加商品
 router.post("/addGoods", async (ctx) => {
+  // console.log(await ctx.request.body);
   const { name, image_url, desc, status, price } = await ctx.request.body;
-  let sql = `INSERT INTO flower(name, image_url, desc, status, price) VALUES (${name}, ${image_url}, ${desc}, ${status}, ${price})`;
+  let sql = `INSERT INTO flower(name, image_url, title, status, price) VALUES ('${name}', '${image_url}', '${desc}', ${status}, ${price})`;
   const res = await query(sql);
   if (res) {
     ctx.body = {
       code: 200,
       msg: "成功",
+      data: res,
     };
   }
 });

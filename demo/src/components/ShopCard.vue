@@ -6,23 +6,9 @@
       </template>
       <template #extra><a-button type="primary" danger shape="circle" size="large">X</a-button></template>
       <template #actions>
-        <a-button
-          type="primary"
-          shape="circle"
-          size="middle
-"
-        >
-          +
-        </a-button>
+        <a-button type="primary" shape="circle" size="middle" @click="() => enitNum(item._id, 1)">+</a-button>
         <div>{{ item.num }}</div>
-        <a-button
-          type="primary"
-          shape="circle"
-          size="middle
-"
-        >
-          -
-        </a-button>
+        <a-button type="primary" shape="circle" size="middle" @click="() => enitNum(item._id, 0)">-</a-button>
       </template>
       <a-card-meta :title="item.name" description="This is the description">
         <template #avatar></template>
@@ -36,7 +22,8 @@
 import { defineComponent, ref } from 'vue'
 export default defineComponent({
   props: {
-    data: Array
+    data: Array,
+    editNum: Function
   },
   setup(props) {
     return { checked: ref(false), props }

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { GET_GOODS_ALL } from '@/api/user'
+import { GET_GOODS_ALL, EDIT_GOODS, ADD_GOODS } from '@/api/user'
 import type { dataType } from '../type/dataType'
 
 interface goodsType {
@@ -9,7 +9,7 @@ interface goodsType {
 export const useGoodsStore = defineStore('goods', {
   state: () => {
     return {
-      data: ['123', '456'] as any
+      data: [] as any
     }
   },
   actions: {
@@ -17,6 +17,20 @@ export const useGoodsStore = defineStore('goods', {
       const data = await GET_GOODS_ALL()
       if (data.data.code === 200) {
         this.data = data.data.data
+        // console.log(this.data[0])
+      }
+    },
+    async editGood(value: dataType.goodData_Type) {
+      const data = await EDIT_GOODS(value)
+      if (data.data.code === 200) {
+        this.data = data.data.data
+        // console.log(this.data[0])
+      }
+    },
+    async addGood(value: dataType.fromData_Type) {
+      const data = await ADD_GOODS(value)
+      if (data.data.code === 200) {
+        this.getGoodsAllData()
         // console.log(this.data[0])
       }
     }
