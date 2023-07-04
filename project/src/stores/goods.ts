@@ -29,8 +29,11 @@ export const useGoodsStore = defineStore('goods', {
     },
     async addGood(value: dataType.fromData_Type) {
       const data = await ADD_GOODS(value)
+      console.log(data)
+
       if (data.data.code === 200) {
-        this.getGoodsAllData()
+        // this.getGoodsAllData()
+        alert('添加成功')
         // console.log(this.data[0])
       }
     }
