@@ -24,7 +24,7 @@ router.delete("/deleteGoods", async (ctx) => {
 // 修改商品信息
 router.post("/editGoods", async (ctx) => {
   const { _id, name, image_url, desc, status, price } = await ctx.request.body;
-  let sql = `UPDATE flower name=${name}, image_url=${image_url}, desc=${desc}, status=${status}, price=${price} WHERE _id=${_id}`;
+  let sql = `UPDATE flower SET name=${name}, image_url=${image_url}, desc=${desc}, status=${status}, price=${price} WHERE _id=${_id}`;
   const res = await query(sql);
   if (res) {
     ctx.body = {
@@ -101,7 +101,7 @@ router.get("/getCartList", async (ctx) => {
 });
 // 购物车添加
 router.post("/addCartList", async (ctx) => {
-  const { _pid, _uid } = ctx.request.body;
+  const { _pid, _uid, _id } = ctx.request.body;
   let select_sql = `SELECT * FROM cart  WHERE _pid=${_pid} `;
   const select_res = await query(select_sql);
   if (!select_res) {
@@ -115,8 +115,8 @@ router.post("/addCartList", async (ctx) => {
       };
     }
   } else {
-    let add_sql = ``;
-    const res = await query(sql);
+    let add_sql = `UPDATE  cart SET num=num+1 WHERE _id=${_id}`;
+    const res = await query(add_sql);
     if (res) {
       ctx.body = {
         code: 200,
@@ -126,9 +126,48 @@ router.post("/addCartList", async (ctx) => {
   }
 });
 // 购物车数量更改
-router.post("/editCartNum", async (ctx) => {});
+router.post("/editCartNum", async (ctx) => {
+  const { _id, type } = ctx.request.body;
+  if (type === 0) {
+    let num_sql = `SELECT * FROM cart WHERE _id=${_id}`;
+    const num_res = await query(num_sql);
+    if (num.res.num <= 1) {
+      ctx.body = {
+        code: 400,
+      };
+    } else {
+      let sun_sql = `UPDATE  cart SET num=num-1 WHERE _id=${_id}`;
+      const res = await query(sun_sql);
+      if (res) {
+        ctx.body = {
+          code: 200,
+          data: res,
+        };
+      }
+    }
+  } else if (type === 1) {
+    let add_sql = `UPDATE  cart SET num=num+1 WHERE _id=${_id}`;
+    const res = await query(add_sql);
+    if (res) {
+      ctx.body = {
+        code: 200,
+        data: res,
+      };
+    }
+  }
+});
 // 删除购物车
-router.post("/deleteCart", async (ctx) => {});
+router.post("/deleteCart", async (ctx) => {
+  const { _id } = ctx.request.body;
+  let sql = `DELETE FROM cart WHERE _id=${_id}`;
+  const res = await query(sql);
+  if (res) {
+    ctx.body = {
+      code: 200,
+      data: res,
+    };
+  }
+});
 // 登录
 router.post("/login", async (ctx) => {
   const { username, password } = ctx.request.body;

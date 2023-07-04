@@ -1,3 +1,4 @@
+import { _getCartData, _addCartData, _editCartNum, _deleteCartData } from '../../api/index'
 const carts = {
   namespaced: true,
   state: {
@@ -17,9 +18,43 @@ const carts = {
     }
   },
   actions: {
-    // async ADD_NUM(state: any, payload: any) {},
-    // async SUN_NUM(state: any, payload: any) {},
-    // async DEL_CART(state: any, payload: any) {}
+    async GET_CART_DATA(context: any, payload: any) {
+      const data = await _getCartData()
+      if (data.data.code === 200) {
+        context.commit('SET_STATE', {
+          key: 'data',
+          value: data.data.data
+        })
+      }
+    },
+    async ADD_CART_DATA(context: any, payload: any) {
+      const data = await _addCartData(payload)
+      if (data.data.code === 200) {
+        context.commit('SET_STATE', {
+          key: 'data',
+          value: data.data.data
+        })
+      }
+    },
+    async EDIT_CART_NUM(context: any, payload: any) {
+      const data = await _editCartNum(payload)
+      if (data.data.code === 200) {
+        context.commit('SET_STATE', {
+          key: 'data',
+          value: data.data.data
+        })
+      }
+    },
+
+    async DEL_CART_DATA(context: any, payload: any) {
+      const data = await _deleteCartData(payload)
+      if (data.data.code === 200) {
+        context.commit('SET_STATE', {
+          key: 'data',
+          value: data.data.data
+        })
+      }
+    }
   }
 }
 export default carts

@@ -11,3 +11,7 @@ export const _goodsSearch = (search: string) => request.post('/api/getGoodsSearc
 export const _banner = () => request.post('/api/getBanner')
 export const _tabSorter = () => request.get('/api/getTabSort')
 export const _getTabData = () => request.get('/api/getTabData')
+export const _getCartData = () => request.get('/api/getCartList')
+export const _editCartNum = (data: any) => request.post('/api/editCartNum', data)
+export const _deleteCartData = (data: any) => request.delete('/api/deleteCart', data)
+export const _addCartData = (item: any) => request.get('/api/addCartList', item)
