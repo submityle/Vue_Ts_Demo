@@ -1,40 +1,40 @@
 <template>
   <div>
     <BackBar></BackBar>
-    <ShopCard></ShopCard>
+    <ShopCard :data="store.state.carts.data"></ShopCard>
     <ShopBar :checkAll="store.state.carts.checkAll" :checkAllChange="checkAll"></ShopBar>
   </div>
 </template>
 
 <script lang="ts">
-import ShopBar from "../../../../components/ShopBar.vue";
-import ShopCard from "../../../../components/ShopCard.vue";
-import BackBar from "../../../../components/BackBar.vue";
-import { useStore } from "vuex";
-import { onMounted } from "vue";
-import axios from "axios";
+import ShopBar from '../../../../components/ShopBar.vue'
+import ShopCard from '../../../../components/ShopCard.vue'
+import BackBar from '../../../../components/BackBar.vue'
+import { useStore } from 'vuex'
+import { onMounted } from 'vue'
 export default {
   components: {
     ShopCard,
     ShopBar,
-    BackBar,
+    BackBar
   },
   setup() {
-    const store = useStore();
+    const store = useStore()
     const checkAll = () => {
-      store.commit("carts/CHECKALL");
-    };
+      store.commit('carts/CHECKALL')
+    }
     // const
 
     onMounted(async () => {
-      await store.dispatch("carts/GET_CART_DATA");
-    });
+      await store.dispatch('carts/GET_CART_DATA')
+      console.log(store.state.carts)
+    })
     return {
       store,
-      checkAll,
-    };
-  },
-};
+      checkAll
+    }
+  }
+}
 </script>
 
 <style></style>

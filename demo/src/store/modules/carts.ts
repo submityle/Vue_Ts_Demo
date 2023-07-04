@@ -2,7 +2,7 @@ import { _getCartData, _addCartData, _editCartNum, _deleteCartData } from '../..
 const carts = {
   namespaced: true,
   state: {
-    data: localStorage.getItem('carts') || [],
+    data: [],
     checkAll: true
   },
   getters: {
@@ -11,7 +11,7 @@ const carts = {
   },
   mutations: {
     SET_STATE(state: any, payload: any) {
-      state[payload.key] = payload.valueas
+      state[payload.key] = payload.value
     },
     CHECKALL(state: any) {
       state.checkAll = !state.checkAll
@@ -25,6 +25,7 @@ const carts = {
           key: 'data',
           value: data.data.data
         })
+        console.log(context.state.data)
       }
     },
     async ADD_CART_DATA(context: any, payload: any) {

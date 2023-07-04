@@ -87,9 +87,12 @@ router.get("/getTabData", async (ctx) => {
 // 获取购物车列表
 router.get("/getCartList", async (ctx) => {
   const BearerToken = ctx.header.authorization;
-  const token = BearerToken.split(" ")[0];
+  // console.log(BearerToken);
+  const token = BearerToken.split(" ")[1];
+  // console.log(token);
   const uid = jwt.verify(token, "secret");
-  let sql = `SELECT * FROM cart JOIN flower ON cart._pid=flower._id WHERE cart._uid=${uid} `;
+  // console.log(uid._id);
+  let sql = `SELECT * FROM cart JOIN flower ON cart._pid=flower._id WHERE cart._uid=${uid._id} `;
   const res = await query(sql);
   if (res) {
     // console.log(res);
