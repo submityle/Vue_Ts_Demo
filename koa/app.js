@@ -23,8 +23,13 @@ router.delete("/deleteGoods", async (ctx) => {
 });
 // 修改商品信息
 router.post("/editGoods", async (ctx) => {
+  const BearerToken = ctx.header.authorization;
+  // console.log(BearerToken);
+  const token = BearerToken.split(" ")[1];
+  // console.log(token);
+  const _uid = jwt.verify(token, "secret");
   const { _id, name, image_url, desc, status, price } = await ctx.request.body;
-  let sql = `UPDATE flower SET name=${name}, image_url=${image_url}, desc=${desc}, status=${status}, price=${price} WHERE _id=${_id}`;
+  let sql = `UPDATE flower SET name=${name}, image_url=${image_url}, desc=${desc}, status=${status}, price=${price} WHERE _id=${_id} and _uid=${_uid}`;
   const res = await query(sql);
   if (res) {
     ctx.body = {

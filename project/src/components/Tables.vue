@@ -20,7 +20,13 @@
 
       <template v-if="column.key === 'action'">
         <span>
-          <a-button type="primary" shape="round" @confirm="onPut(record)">编辑</a-button>
+          <a-button
+            type="primary"
+            shape="round"
+            @confirm="onPut(record)"
+            @click="() => onEdit(record)"
+            >编辑</a-button
+          >
           <a-button type="primary" danger shape="round" @confirm="onDelete(record)">删除</a-button>
         </span>
       </template>
@@ -36,7 +42,8 @@ export default defineComponent({
   props: {
     data: {
       type: Array
-    }
+    },
+    onEdit: Function
   },
   setup(props) {
     const columns = [

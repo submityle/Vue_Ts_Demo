@@ -57,7 +57,7 @@ export default defineComponent({
     const onFinish = async (values: any) => {
       // console.log('Success:', values)
       login(formState)
-      console.log(store)
+      // console.log(store)
       // store.commit('login/setState',{})
     }
 

@@ -38,8 +38,7 @@
       </template>
       添加
     </a-button>
-
-    <Tables :data="store.data"></Tables>
+    <Tables :data="store.data" :onEdit="tableEdit"></Tables>
   </div>
 </template>
 <script lang="ts">
@@ -84,7 +83,11 @@ export default defineComponent({
     const formHandleCancel = () => {
       visible.value = false
     }
-
+    const tableEdit = (item: dataType.goodData_Type) => {
+      console.log(item)
+      visible.value = true
+      // store.editGood(item)
+    }
     return {
       store,
       formState,
@@ -94,7 +97,8 @@ export default defineComponent({
       onFinishFailed,
       showModal,
       fromHandleOk,
-      formHandleCancel
+      formHandleCancel,
+      tableEdit
     }
   }
 })
