@@ -1,6 +1,6 @@
 const Koa = require("koa");
 const koaRouter = require("koa-router");
-const static = require("koa-static");
+require("koa-static");
 const view = require("koa-view");
 const { koaBody } = require("koa-body");
 const cors = require("@koa/cors");
@@ -12,7 +12,8 @@ const router = new koaRouter();
 // 删除商品
 router.delete("/deleteGoods", async (ctx) => {
   const { _id } = await ctx.request.body;
-  let sql = `DELETE FROM flower WHERE _id=${_id}`;
+  let sql;
+  sql = `DELETE FROM flower WHERE _id=${_id}`;
   const res = await query(sql);
   if (res) {
     ctx.body = {
@@ -141,7 +142,7 @@ router.post("/editCartNum", async (ctx) => {
   if (type === 0) {
     let num_sql = `SELECT * FROM cart WHERE _id=${_id}`;
     const num_res = await query(num_sql);
-    if (num.res.num <= 1) {
+    if (num_res.num <= 1) {
       ctx.body = {
         code: 400,
       };
